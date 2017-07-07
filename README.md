@@ -24,7 +24,7 @@ el.onscroll = function () {
 - speed: 0.1 // speed below which we consider the user to be lingering
 - time: 400 // time the user has to linger for in order for the linger to count
 - timeout: 2000 // how long to keep monitoring for changes after the last change
- -interval: 50 // how frequently to monitor for changes
+- interval: 50 // how frequently to monitor for changes
 
 ## demo
 
