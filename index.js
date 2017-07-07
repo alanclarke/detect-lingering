@@ -37,7 +37,7 @@ module.exports = function createLingerDetector (onLinger, options) {
   function monitor () {
     var averageSpeed = 0
     if (snapshots.length >= 2) {
-      averageSpeed = snapshots.reduce((memo, val, i) => {
+      averageSpeed = snapshots.reduce(function (memo, val, i) {
         if (snapshots[i + 1]) memo += speed(val, snapshots[i + 1])
         return memo
       }, 0) / snapshots.length
