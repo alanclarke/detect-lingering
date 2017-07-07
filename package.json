@@ -1,0 +1,31 @@
+{
+  "name": "detect-lingering",
+  "version": "1.0.0",
+  "description": "Tiny utility for detecting when a user lingers, e.g. if they pause or slow down to look at something while scrolling",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "demo": "cd demo && jetpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "jetpack": "^0.3.1",
+    "mocha": "^3.4.2",
+    "preact": "^8.1.0",
+    "sinon": "^2.3.6"
+  },
+  "dependencies": {},
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}
