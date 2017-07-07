@@ -1,6 +1,6 @@
 {
   "name": "detect-lingering",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tiny utility for detecting when a user lingers, e.g. if they pause or slow down to look at something while scrolling",
   "main": "index.js",
   "directories": {
