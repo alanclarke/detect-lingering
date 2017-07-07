@@ -1,0 +1,110 @@
+const sinon = require('sinon')
+const expect = require('chai').expect
+const createDetector = require('../index')
+let clock, onLinger, stub
+
+describe('detect-lingering', function () {
+  beforeEach(function () {
+    clock = sinon.useFakeTimers(Date.now())
+    stub = sinon.stub()
+    onLinger = createDetector(stub, { time: 100, speed: 1, interval: 50, timeout: 1000 })
+  })
+
+  afterEach(function () {
+    clock.restore()
+  })
+
+  it('should detect no lingering while moving fast', function () {
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    onLinger(2000)
+    clock.tick(40)
+    onLinger(3000)
+    clock.tick(40)
+    onLinger(4000)
+    clock.tick(40)
+    onLinger(5000)
+    clock.tick(40)
+    expect(stub.called).to.eql(false)
+  })
+
+  it('should detect no lingering while moving slow for a short period', function () {
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    onLinger(1001)
+    clock.tick(40)
+    onLinger(1002)
+    clock.tick(40)
+    onLinger(4000)
+    clock.tick(40)
+    onLinger(5000)
+    clock.tick(40)
+    expect(stub.called).to.eql(false)
+  })
+
+  it('should detect lingering while moving slow for a period', function () {
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    onLinger(2000)
+    clock.tick(40)
+    onLinger(2002)
+    clock.tick(40)
+    onLinger(2003)
+    clock.tick(40)
+    onLinger(2004)
+    clock.tick(40)
+    expect(stub.calledOnce).to.eql(true)
+  })
+
+  it('should detect lingering while not moving for a period', function () {
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    expect(stub.calledOnce).to.eql(true)
+  })
+
+  it('should detect a subsequent linger', function () {
+    clock.tick(40)
+    onLinger(1000)
+    clock.tick(40)
+    onLinger(2000)
+    clock.tick(40)
+    onLinger(2002)
+    clock.tick(40)
+    onLinger(2003)
+    clock.tick(40)
+    onLinger(2004)
+    clock.tick(40)
+    expect(stub.calledOnce).to.eql(true)
+
+    // speed up again
+    onLinger(3005)
+    clock.tick(40)
+    onLinger(4005)
+    clock.tick(40)
+
+    // second linger
+    onLinger(5005)
+    clock.tick(40)
+    onLinger(5006)
+    clock.tick(40)
+    onLinger(5007)
+    clock.tick(40)
+    onLinger(5008)
+    clock.tick(40)
+    onLinger(5009)
+    clock.tick(40)
+    expect(stub.calledTwice).to.eql(true)
+  })
+})
