@@ -3,7 +3,7 @@ Tiny utility for detecting when a user lingers, e.g. if they pause or slow down 
 
 ## installation
 ```js
-npm install semverbs
+npm install detect-lingering
 ```
 
 ## usage
@@ -15,6 +15,8 @@ function onLinger () {
 var detector = createLingerDetector(onLinger, options)
 
 el.onscroll = function () {
+  // any actual calculations are deferred to a set interval
+  // detector is very light method, and can be used in the scroll handler
   detector(el.scrollTop)
 }
 
