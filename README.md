@@ -17,10 +17,13 @@ var detector = createLingerDetector(onLinger, options)
 el.onscroll = function () {
   // any actual calculations are deferred to a set interval
   // detector is very light method, and can be used in the scroll handler
-  detector(el.scrollTop)
+  detector.update(el.scrollTop)
 }
-
 ```
+
+## methods
+- update: call this every time your value changes, e.g. scrollTop. Detector uses this to detect lingering
+- stop: call this to stop any scheduled calculations
 
 ## options
 - speed: 0.1 // speed below which we consider the user to be lingering

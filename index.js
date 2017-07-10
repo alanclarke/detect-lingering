@@ -10,7 +10,9 @@ module.exports = function createLingerDetector (onLinger, options) {
   var interval, timeout, time, lingering
   var snapshots = []
 
-  return function updateValue (value) {
+  return { update: update, stop: stop }
+
+  function update (value) {
     snapshots.push(snapshot(value))
     start()
   }
