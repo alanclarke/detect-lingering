@@ -10,7 +10,7 @@
     "test": "mocha",
     "demo": "cd demo && jetpack"
   },
-  "author": "",
+  "author": "Alan Clarke <code@alz.io> (alz.io)",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.0.2",
@@ -27,5 +27,14 @@
       "beforeEach",
       "afterEach"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanclarke/detect-lingering.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/alanclarke/detect-lingering/issues"
+  },
+  "homepage": "https://github.com/alanclarke/detect-lingering#readme"
 }
